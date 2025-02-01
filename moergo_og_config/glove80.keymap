@@ -156,6 +156,9 @@
             >;
         };
 
+        // TODO: fix 
+        // devicetree error: glove80.keymap:166 (column 447): 
+        // parse error: expected number or parenthesized expression
         symbol_layer {
             bindings = <
             &none       &none      &none      &none      &none                                                                                                              &none      &none        &none      &none      &none
