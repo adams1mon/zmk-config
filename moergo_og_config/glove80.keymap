@@ -29,7 +29,7 @@
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo LOWER &to LOWER>;
+            bindings = <&mo LOWER>, <&to LOWER>;
         };
 
         magic: magic_hold_tap {
@@ -38,7 +38,7 @@
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo &rgb_ug_status_macro>;
+            bindings = <&mo>, <&rgb_ug_status_macro>;
         };
 
         ret_symbol: ret_symbol_layer_tap_dance {
@@ -47,7 +47,7 @@
             label = "RET_TOGGLE_SYMBOL_LAYER";
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo SYMBOL &kp RET>;
+            bindings = <&mo SYMBOL>, <&kp RET>;
         };
 
         shft_caps_td: shift_caps_td {
@@ -55,7 +55,7 @@
             label = "DOUBLE_SHIFT_TO_CAPS_TD";
             #binding-cells = <1>;
             tapping-term-ms = <200>;
-            bindings = <&kp LSHFT &kp CAPS>;
+            bindings = <&kp>, <&kp CAPS>;
         };
 
         //////////////////////////////////////////////////////////////////////////
