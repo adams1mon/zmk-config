@@ -1,7 +1,13 @@
 name: Build Moergo ZMK fork
 
-# on: [push, pull_request, workflow_dispatch]
-on: [workflow_dispatch]
+on: 
+  workflow_dispatch:
+    inputs:
+      config_path:
+        description: "Path to the config directory"
+        default: "moergo_og_config"
+        required: true
+        type: string
 
 jobs:
   build:
@@ -27,7 +33,7 @@ jobs:
           skipPush: true
 
       - name: Build Glove80 combined firmware
-        run: nix-build config -o combined
+        run: nix-build "${{ inputs.config_path }}" -o combined
 
       - name: Copy result out of nix store
         run: cp combined/glove80.uf2 glove80.uf2
