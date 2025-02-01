@@ -1,4 +1,4 @@
-name: Build Moergo ZMK fork
+name: Build MoErgo ZMK fork
 
 on: 
   workflow_dispatch:
