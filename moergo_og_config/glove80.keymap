@@ -16,6 +16,7 @@
 // layers
 #define DEFAULT 0
 #define LOWER 1
+#define SYMBOL 3
 #define MAGIC 2
 #define FACTORY_TEST 3
 
@@ -38,6 +39,40 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&rgb_ug_status_macro>;
+        };
+
+        enter_symbol: enter_symbol_layer_tap_dance {
+            compatible = "zmk,behavior-hold-tap";
+            label = "ENTER_TOGGLE_SYMBOL";
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo SYMBOL>, <&kp RET>;
+        };
+
+        shft_caps_td: shift_caps_td {
+            compatible = "zmk,behavior-tap-dance";
+            label = "DOUBLE_SHIFT_TO_CAPS_TD";
+            #binding-cells = <1>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LSHFT>, <&kp CAPS>;
+        };
+
+        //////////////////////////////////////////////////////////////////////////
+        //
+        // ZMK global overrides
+        //
+        //////////////////////////////////////////////////////////////////////////
+
+        // CapsWord - ported from Pascal Getreuer's extension for QMK
+        // - https://zmk.dev/docs/behaviors/caps-word
+        // - https://getreuer.info/posts/keyboards/caps-word/index.html
+        //
+        behavior_caps_word {
+          continue-list = <
+            UNDER MINUS
+            BSPC  DEL
+            N1 N2 N3 N4 N5 N6 N7 N8 N9 N0
+          >;
         };
     };
 
@@ -100,12 +135,12 @@
             // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
-            &kp F1         &kp F2   &kp F3      &kp F4      &kp F5                                                                                         &kp F6  &kp F7      &kp F8      &kp F9      &kp F10
-            &kp EQUAL      &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                     &kp N6  &kp N7  &kp N8      &kp N9      &kp N0      &kp MINUS
-            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                      &kp Y   &kp U   &kp I       &kp O       &kp P       &kp BSLH
-            &kp ESC        &kp A    &kp S       &kp D       &kp F       &kp G                                                                      &kp H   &kp J   &kp K       &kp L       &kp SEMI    &kp SQT
-            &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &kp LSHFT   &kp LCTRL   &layer_td  &kp LGUI  &kp RCTRL &kp RSHFT   &kp N   &kp M   &kp COMMA   &kp DOT     &kp FSLH    &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &kp SPACE           &kp UP  &kp DOWN    &kp LBKT    &kp RBKT    &kp PG_DN
+            &kp F1         &kp F2   &kp F3      &kp F4      &kp F5                                                                                                                  &kp F6  &kp F7      &kp F8      &kp F9      &kp F10
+            &kp EQUAL      &kp N1   &kp N2      &kp N3      &kp N4      &kp N5                                                                                              &kp N6  &kp N7  &kp N8      &kp N9      &kp N0      &kp MINUS
+            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                                               &kp Y   &kp U   &kp I       &kp O       &kp P       &kp BSLH
+            &kp ESC        &kp A    &kp S       &kp D       &kp F       &kp G                                                                                               &kp H   &kp J   &kp K       &kp L       &kp SEMI    &kp SQT
+            &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &shft_caps_td LSHFT   &kp LCTRL   &layer_td  &kp LGUI  &kp RCTRL      &shft_caps_td RSHFT   &kp N   &kp M   &kp COMMA   &kp DOT     &kp FSLH    &kp PG_UP
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC              &kp DEL     &kp LALT   &kp RALT  &enter_symbol  &kp SPACE                     &kp UP  &kp DOWN    &kp LBKT    &kp RBKT    &kp PG_DN
             >;
         };
 
@@ -117,6 +152,17 @@
             &trans            &none               &kp LEFT        &kp DOWN        &kp RIGHT       &kp PG_UP                                                                             &kp PRCNT    &kp KP_N4    &kp KP_N5    &kp KP_N6     &kp KP_PLUS     &none
             &trans            &kp K_CMENU         &none           &kp F11         &kp F12         &kp PG_DN       &trans      &trans      &to DEFAULT &trans      &trans      &trans    &kp COMMA    &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &trans
             &trans            &kp CAPS            &kp INS         &kp F11         &kp F12                         &trans      &trans      &trans      &trans      &trans      &trans                 &kp KP_N0    &kp KP_N0    &kp KP_DOT    &kp KP_ENTER    &trans
+            >;
+        };
+
+        symbol_layer {
+            bindings = <
+            &none       &none      &none      &none      &none                                                                                               &none      &none        &none      &none      &none
+            &kp GRAVE   &kp LBKT   &kp LPAR   &kp RPAR   &kp RBKT    &kp DOT                                                                     &none       &none      &none        &none      &none      &none
+            &kp EXCL    &kp COMMA  &kp LBRC   &kp RBRC   &kp SEMI    &kp QMARK                                                                   &kp GRAVE   &kp LEFT   &kp UP       &kp DOWN   &kp RIGHT  &kp HOME
+            &kp HASH    &kp CARET  &kp EQUAL  &kp UNDER  &kp DLLR    &kp STAR                                                                    &kp DQT     &kp BSPC   &kp TAB      &kp SPACE  &kp RET    &kp END
+            &kp TILDE   &kp LT     &kp PIPE   &kp MINUS  &kp GT      &kp FSLH   &kp BSLH    &kp DOT   &kp STAR      &to DEFAULT  &none   &none   &kp SQT     &kp DEL    &none        &none      &none      &none
+            &none       &kp AMPS   &kp SQT    &kp DQT    &kp PLUS               &kp PRCNT   &kp COLON &kp AT        &none        &none   &none               &kp _UNDO  &none        &none      &none      &none
             >;
         };
 
@@ -141,5 +187,6 @@
             &kp N5   &kp N1   &kp N7   &kp N3   &kp N9            &kp N7   &kp N8   &kp N9      &kp N9   &kp N8   &kp N7            &kp N9   &kp N3   &kp N7   &kp N1   &kp N5
             >;
         };
+
     };
 };
