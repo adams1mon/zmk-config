@@ -17,6 +17,10 @@
 #     cmake-args: -DCONFIG_ZMK_STUDIO=y
 #     artifact-name: corne_left_with_studio
 #
+
+# NOTE:
+# This is only used for ZMK's original build pipeline based on the 
+# "west" tool (see Zephyr's docs)
 ---
 include:
   - board: glove80_lh
