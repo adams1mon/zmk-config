@@ -41,9 +41,10 @@
             bindings = <&mo>, <&rgb_ug_status_macro>;
         };
 
-        enter_symbol: enter_symbol_layer_tap_dance {
+        ret_symbol: ret_symbol_layer_tap_dance {
             compatible = "zmk,behavior-hold-tap";
-            label = "ENTER_TOGGLE_SYMBOL";
+            #binding-cells = <0>;
+            label = "RET_TOGGLE_SYMBOL_LAYER";
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo SYMBOL>, <&kp RET>;
@@ -140,7 +141,7 @@
             &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                                               &kp Y   &kp U   &kp I       &kp O       &kp P       &kp BSLH
             &kp ESC        &kp A    &kp S       &kp D       &kp F       &kp G                                                                                               &kp H   &kp J   &kp K       &kp L       &kp SEMI    &kp SQT
             &kp GRAVE      &kp Z    &kp X       &kp C       &kp V       &kp B   &shft_caps_td LSHFT   &kp LCTRL   &layer_td  &kp LGUI  &kp RCTRL      &shft_caps_td RSHFT   &kp N   &kp M   &kp COMMA   &kp DOT     &kp FSLH    &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC              &kp DEL     &kp LALT   &kp RALT  &enter_symbol  &kp SPACE                     &kp UP  &kp DOWN    &kp LBKT    &kp RBKT    &kp PG_DN
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC              &kp DEL     &kp LALT   &kp RALT  &ret_symbol  &kp SPACE                     &kp UP  &kp DOWN    &kp LBKT    &kp RBKT    &kp PG_DN
             >;
         };
 
@@ -157,12 +158,12 @@
 
         symbol_layer {
             bindings = <
-            &none       &none      &none      &none      &none                                                                                               &none      &none        &none      &none      &none
-            &kp GRAVE   &kp LBKT   &kp LPAR   &kp RPAR   &kp RBKT    &kp DOT                                                                     &none       &none      &none        &none      &none      &none
-            &kp EXCL    &kp COMMA  &kp LBRC   &kp RBRC   &kp SEMI    &kp QMARK                                                                   &kp GRAVE   &kp LEFT   &kp UP       &kp DOWN   &kp RIGHT  &kp HOME
-            &kp HASH    &kp CARET  &kp EQUAL  &kp UNDER  &kp DLLR    &kp STAR                                                                    &kp DQT     &kp BSPC   &kp TAB      &kp SPACE  &kp RET    &kp END
-            &kp TILDE   &kp LT     &kp PIPE   &kp MINUS  &kp GT      &kp FSLH   &kp BSLH    &kp DOT   &kp STAR      &to DEFAULT  &none   &none   &kp SQT     &kp DEL    &none        &none      &none      &none
-            &none       &kp AMPS   &kp SQT    &kp DQT    &kp PLUS               &kp PRCNT   &kp COLON &kp AT        &none        &none   &none               &kp _UNDO  &none        &none      &none      &none
+            &none       &none      &none      &none      &none                                                                                                              &none      &none        &none      &none      &none
+            &kp GRAVE   &kp LBKT   &kp LPAR   &kp RPAR   &kp RBKT    &kp DOT                                                                                    &none       &none      &none        &none      &none      &none
+            &kp EXCL    &kp COMMA  &kp LBRC   &kp RBRC   &kp SEMI    &kp QMARK                                                                                  &kp GRAVE   &kp LEFT   &kp UP       &kp DOWN   &kp RIGHT  &kp HOME
+            &kp HASH    &kp CARET  &kp EQUAL  &kp UNDER  &kp DLLR    &kp STAR                                                                                   &kp DQT     &kp BSPC   &kp SPACE    &kp TAB    &kp RET    &kp END
+            &kp TILDE   &kp LT     &kp PIPE   &kp MINUS  &kp GT      &kp FSLH   &kp BSLH    &kp DOT   &kp STAR      &kp LGUI  &kp RCTRL  &shft_caps_td RSHFT    &kp SQT     &kp DEL    &none        &none      &none      &none
+            &none       &kp AMPS   &kp SQT    &kp DQT    &kp PLUS               &kp PRCNT   &kp COLON &kp AT        &kp RALT  &kp RET    &kp SPACE                          &kp none   &none        &none      &none      &none
             >;
         };
 
