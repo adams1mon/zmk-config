@@ -1,0 +1,50 @@
+// All needed common includes will be added by the layout editor.
+
+// Use the Glove80 Layout Editor generated layer names, like
+// LAYER_<name>
+// this will be added to the final file, here we just use them.
+
+behaviors {
+
+    // hold for layer modifier, tap for keypress
+    layer_ht: layer_hold_tap {
+        compatible = "zmk,behavior-hold-tap";
+        #binding-cells = <2>;
+        flavor = "tap-preferred";
+        tapping-term-ms = <200>;
+        bindings = <&mo>, <&kp>;
+    };
+
+    lshft_caps_td: lshift_caps_tap_dance {
+        compatible = "zmk,behavior-tap-dance";
+        #binding-cells = <0>;
+        tapping-term-ms = <200>;
+        bindings = <&kp LSHFT>, <&kp CAPS>;
+    };
+
+    rshft_caps_td: rshift_caps_tap_dance {
+        compatible = "zmk,behavior-tap-dance";
+        #binding-cells = <0>;
+        tapping-term-ms = <200>;
+        bindings = <&kp RSHFT>, <&kp CAPS>;
+    };
+
+    //////////////////////////////////////////////////////////////////////////
+    //
+    // ZMK global overrides
+    //
+    //////////////////////////////////////////////////////////////////////////
+
+    // CapsWord - ported from Pascal Getreuer's extension for QMK
+    // - https://zmk.dev/docs/behaviors/caps-word
+    // - https://getreuer.info/posts/keyboards/caps-word/index.html
+    //
+    behavior_caps_word {
+      continue-list = <
+        UNDER MINUS
+        BSPC  DEL
+        N1 N2 N3 N4 N5 N6 N7 N8 N9 N0
+      >;
+    };
+};
+
